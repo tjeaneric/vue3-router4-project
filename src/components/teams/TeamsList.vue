@@ -5,6 +5,7 @@ import TeamsItem from './TeamsItem.vue'
 const teams = inject('teams')
 </script>
 <template>
+  <RouterView />
   <ul>
     <teams-item
       v-for="team in teams"

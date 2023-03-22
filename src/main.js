@@ -11,12 +11,14 @@ const routes = [
   {
     path: '/teams',
     name: 'Teams',
-    component: TeamsList
-  },
-  {
-    path: '/teams/:teamId',
-    component: TeamMembers,
-    props: true
+    component: TeamsList,
+    children: [
+      {
+        path: ':teamId',
+        component: TeamMembers,
+        props: true
+      }
+    ]
   },
   {
     path: '/users/',
