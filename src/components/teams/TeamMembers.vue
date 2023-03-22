@@ -1,17 +1,18 @@
 <script setup>
 import { ref, inject, watch } from 'vue'
-import { useRoute } from 'vue-router'
+// import { useRoute } from 'vue-router'
 import UserItem from '../users/UserItem.vue'
 
-const route = useRoute()
+const props = defineProps(['teamId'])
+
+// const route = useRoute()
 const teams = inject('teams')
 const users = inject('users')
 
 const teamName = ref('')
 const teamMembers = ref([])
 
-const chosenTeam = (id) => {
-  const teamId = id
+const chosenTeam = (teamId) => {
   const selectedTeam = teams.find((team) => team.id === teamId)
   const members = selectedTeam.members
   const selectedMembers = []
@@ -23,10 +24,10 @@ const chosenTeam = (id) => {
   teamMembers.value = selectedMembers
 }
 
-chosenTeam(route.params.teamId)
+chosenTeam(props.teamId)
 
 watch(() => {
-  route.params.teamId, chosenTeam(route.params.teamId)
+  props.teamId, chosenTeam(props.teamId)
 })
 </script>
 
