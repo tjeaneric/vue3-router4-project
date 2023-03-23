@@ -5,25 +5,21 @@ import TeamsList from './components/teams/TeamsList.vue'
 import UsersList from './components/users/UsersList.vue'
 import TeamMembers from './components/teams/TeamMembers.vue'
 import TheNotFound from './components/nav/TheNotFound.vue'
+import TeamsFooter from './components/teams/TeamsFooter.vue'
+import UsersFooter from './components/users/UsersFooter.vue'
 
 const routes = [
   { path: '/', redirect: '/teams' },
   {
     path: '/teams',
     name: 'Teams',
-    component: TeamsList,
-    children: [
-      {
-        path: ':teamId',
-        component: TeamMembers,
-        props: true
-      }
-    ]
+    components: { default: TeamsList, footer: TeamsFooter },
+    children: [{ name: 'team-members', path: ':teamId', component: TeamMembers, props: true }]
   },
   {
     path: '/users/',
     name: 'Users',
-    component: UsersList
+    components: { default: UsersList, footer: UsersFooter }
   },
   { path: '/:notFound(.*)*', name: 'notFound', component: TheNotFound }
 ]

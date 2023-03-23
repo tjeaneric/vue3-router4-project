@@ -33,6 +33,9 @@ provide('users', users.value)
     <!-- <component :is="tabs[activePage]"></component> -->
     <RouterView />
   </main>
+  <footer>
+    <router-view name="footer"></router-view>
+  </footer>
 </template>
 
 <style>

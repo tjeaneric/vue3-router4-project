@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+
 const props = defineProps(['id', 'name', 'memberCount'])
 const teamLink = computed(() => '/teams/' + props.id)
 </script>
