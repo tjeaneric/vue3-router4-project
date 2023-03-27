@@ -19,23 +19,36 @@ const routes = [
   {
     path: '/users/',
     name: 'Users',
-    components: { default: UsersList, footer: UsersFooter }
+    components: { default: UsersList, footer: UsersFooter },
+    beforeEnter: (to, from) => {
+      // reject the navigation
+      return { name: 'team-members', params: { teamId: 't3' } }
+    }
   },
   { path: '/:notFound(.*)*', name: 'notFound', component: TheNotFound }
 ]
 
-const rourer = createRouter({
+const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
   linkActiveClass: 'active',
   scrollBehavior(to, from, savedPosition) {
-    console.log(to, from, savedPosition)
+    // console.log(to, from, savedPosition)
     if (savedPosition) return savedPosition
     return { left: 0, top: 0, behavior: 'smooth' }
   }
 })
+
+router.beforeEach((to, from) => {
+  // console.log('Global beforeEach')
+  // console.log(to, from)
+  // if (to.name !== 'team-members') {
+  //   return { name: 'team-members', params: { teamId: 't3' } }
+  // }
+})
+
 const app = createApp(App)
 
-app.use(rourer)
+app.use(router)
 
 app.mount('#app')
