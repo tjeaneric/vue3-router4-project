@@ -1,5 +1,5 @@
 <script setup>
-import { ref, inject, watch } from 'vue'
+import { ref, inject, watchEffect } from 'vue'
 // import { useRoute } from 'vue-router'
 import UserItem from '../users/UserItem.vue'
 
@@ -26,7 +26,7 @@ const chosenTeam = (teamId) => {
 
 chosenTeam(props.teamId)
 
-watch(() => {
+watchEffect(() => {
   props.teamId, chosenTeam(props.teamId)
 })
 </script>
